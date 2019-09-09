@@ -1,0 +1,28 @@
+.ct-news {
+  position: relative;
+}
+.ct-news-list {
+  display: flex;
+  flex-direction: column;
+}
+.ct-news-list-item {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  padding: 7px 15px;
+}
+.ct-news-list-item-img {
+  width: 60px;
+  height: 60px;
+}
+.ct-news-list-item-content {
+  display: flex;
+  flex-direction: column;
+}
+.ct-news-list-item-title {
+  font-size: 25px;
+  font-weight: bold;
+}
+.ct-news-list-item-subtitle {
+  font-size: 20px;
+}
