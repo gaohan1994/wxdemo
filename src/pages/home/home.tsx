@@ -1,6 +1,6 @@
 import { ComponentClass } from 'react'
 import Taro, { Component, Config } from '@tarojs/taro'
-import { View, Text } from '@tarojs/components'
+import { View, Text, Image } from '@tarojs/components'
 import { connect } from '@tarojs/redux';
 import { AtGrid } from 'taro-ui';
 
@@ -64,51 +64,92 @@ class Home extends Component {
 
   componentDidHide () { }
 
+  public navigateTo = (url: string) => {
+    Taro.navigateTo({
+      url: `/pages/${url}`
+    })
+  }
+
+  public onNavClick = (item: any) => {
+    switch (item.value) {
+      case '店员管理': {
+        this.navigateTo('manage/staff');
+        return;
+      }
+      case '进销存管理': {
+        this.navigateTo('manage/manage');
+        return;
+      }
+      default: {
+        return;
+      }
+    }
+  }
+
   render () {
     return (
-      <View className='index'>
-        <View>
-          <Text>{this.props.userInfo && this.props.userInfo.username || ''}</Text>
+      <View className='ct-home'>
+        <Image src="http://net.huanmusic.com/wx/bg.png" className="ct-home-bg"  />
+        <View className="ct-home-card">
+          <View className="ct-home-card-content">
+            <Text className="ct-home-card-content-title">今日收款（元）</Text>
+            <Text className="ct-home-card-content-number">99.99</Text>
+            <Text className="ct-home-card-content-subtitle">收款共10笔</Text>
+          </View>
+          <View className="ct-home-card-buttons">
+            <View 
+              onClick={() => this.navigateTo('trade/history')}
+              className="ct-home-card-buttons-button border-right"
+            >
+              <Image src="http://net.huanmusic.com/wx/icon_record.png" className="ct-home-card-buttons-button-img" />
+              <Text className="ct-home-card-content-subtitle ">交易记录</Text>
+            </View>
+            <View 
+              onClick={() => this.navigateTo('trade/statistic')}
+              className="ct-home-card-buttons-button"
+            >
+              <Image src="http://net.huanmusic.com/wx/icon_revenue.png" className="ct-home-card-buttons-button-img" />
+              <Text className="ct-home-card-content-subtitle ">收入统计</Text>
+            </View>
+          </View>
         </View>
 
-        <AtGrid 
-          data={[
-            {
-              image: 'https://img12.360buyimg.com/jdphoto/s72x72_jfs/t6160/14/2008729947/2754/7d512a86/595c3aeeNa89ddf71.png',
-              value: '店员管理'
-            },
-            {
-              image: 'https://img20.360buyimg.com/jdphoto/s72x72_jfs/t15151/308/1012305375/2300/536ee6ef/5a411466N040a074b.png',
-              value: '进销存管理'
-            },
-            {
-              image: 'https://img10.360buyimg.com/jdphoto/s72x72_jfs/t5872/209/5240187906/2872/8fa98cd/595c3b2aN4155b931.png',
-              value: '销量统计'
-            },
-            {
-              image: 'https://img12.360buyimg.com/jdphoto/s72x72_jfs/t10660/330/203667368/1672/801735d7/59c85643N31e68303.png',
-              value: '满减促销'
-            },
-            {
-              image: 'https://img14.360buyimg.com/jdphoto/s72x72_jfs/t17251/336/1311038817/3177/72595a07/5ac44618Na1db7b09.png',
-              value: '流量查询'
-            },
-            {
-              image: 'https://img30.360buyimg.com/jdphoto/s72x72_jfs/t5770/97/5184449507/2423/294d5f95/595c3b4dNbc6bc95d.png',
-              value: '全部'
-            }
-          ]} 
-        />
+        <View className="ct-home-container">
+          <AtGrid 
+            hasBorder={false}
+            data={[
+              {
+                image: 'http://net.huanmusic.com/wx/icon_menu_clerk.png',
+                value: '店员管理',
+              },
+              {
+                image: 'http://net.huanmusic.com/wx/icon_menu_purchase.png',
+                value: '进销存管理'
+              },
+              {
+                image: 'http://net.huanmusic.com/wx/icon_menu_sales.png',
+                value: '销量统计'
+              },
+              {
+                image: 'http://net.huanmusic.com/wx/icon_menu_promotion.png',
+                value: '满减促销'
+              },
+              {
+                image: 'http://net.huanmusic.com/wx/icon_menu_flow.png',
+                value: '流量查询'
+              },
+              {
+                image: 'http://net.huanmusic.com/wx/icon_menu_all.png',
+                value: '全部'
+              }
+            ]} 
+            onClick={this.onNavClick}
+          />
+        </View>
+        
       </View>
     )
   }
 }
-
-// #region 导出注意
-//
-// 经过上面的声明后需要将导出的 Taro.Component 子类修改为子类本身的 props 属性
-// 这样在使用这个子类时 Ts 才不会提示缺少 JSX 类型参数错误
-//
-// #endregion
 
 export default Home as ComponentClass<PageOwnProps, PageState>

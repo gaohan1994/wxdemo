@@ -1,0 +1,61 @@
+.ct-trade {
+  position: relative;
+}
+.ct-trade-font {
+  font-size: 26px;
+  color: #999999;
+}
+.ct-trade-font-black {
+  color: #333333;
+}
+.ct-trade-title {
+  font-size: 32px;
+  color: #999999;
+}
+.ct-trade-number {
+  font-size: 80px;
+  color: #2EAAF8;
+}
+.ct-trade-card {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  width: 100%;
+  padding: 15px 34px;
+  border-bottom: 8px solid #f8f8f8;
+}
+.ct-trade-card-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 0;
+}
+.ct-trade-card-content-margin {
+  margin-top: 30px;
+}
+.ct-trade-card-item {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 0;
+}
+.ct-trade-card-item-detail {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.ct-trade-card-item-detail-price {
+  width: 200px;
+  text-align: right;
+}
+.ct-trade-card-item-detail-number {
+  margin-right: 20px;
+}
+.ct-trade-card-border {
+  padding-bottom: 30px;
+  margin-bottom: 30px;
+  border-bottom: 1px solid #eeeeee;
+}

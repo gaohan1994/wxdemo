@@ -1,0 +1,32 @@
+
+@list-menu-prefix: ct-product-list-menu;
+
+.@{list-menu-prefix} {
+  padding-top: 20px;
+  &-item {
+    position: relative;
+    height: 100px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    &-active {
+      background-color: white;
+    }
+    &-bge {
+      width: 2px;
+      background-color: #2EAAF8;
+      height: 100px;
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+  }
+  &-name {
+    font-size: 28px;
+    color: #999999;
+    &-active {
+      color: #2295E6;
+    }
+  }
+}

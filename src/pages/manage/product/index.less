@@ -1,0 +1,42 @@
+@import "../../../styles/theme.less";
+@product-predix: ct-product;
+
+.@{product-predix} {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  &-menu-container {
+    width: 200px;
+    background-color: #F6F6F6;
+  }
+
+  &-search {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 27px 0;
+    border-bottom: 1px solid @border-color;
+    &-input {
+      width: 600px;
+      height: 70px;
+      border-radius: 35px;
+      background-color: #F6F6F6;
+    }
+    &-scan {
+      width: 55px;
+      height: 55px;
+      margin-left: 30px;
+    }
+  }
+
+  &-list {
+    display: flex;
+    flex-direction: row;
+    &-container {
+      flex-grow: 1;
+      flex: 1;
+    }
+  }
+}

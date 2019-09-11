@@ -6,6 +6,6 @@ export function createAction(options) {
     //   dispatch({ type, payload: cb ? cb(res) : res })
     //   return res
     // })
-    return dispatch({type, payload});
+    return dispatch({type, payload: cb ? cb(payload) : payload});
   }
 }

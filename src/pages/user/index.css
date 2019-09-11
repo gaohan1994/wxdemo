@@ -1,0 +1,79 @@
+.ct-user {
+  background-color: white;
+}
+.ct-user-font {
+  font-size: 30px;
+  color: #696974;
+}
+.ct-user-name {
+  font-size: 36px;
+  font-weight: bold;
+  color: white;
+}
+.ct-user-phone {
+  font-size: 22px;
+  color: white;
+}
+.ct-user-card {
+  margin: 24px 35px;
+  width: 680px;
+  height: 280px;
+  border-radius: 24px;
+  background-image: url('http://net.huanmusic.com/wx/card.png');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.ct-user-card-avator {
+  width: 114px;
+  height: 114px;
+  margin-right: 24px;
+  margin-left: 47px;
+}
+.ct-user-card-content {
+  display: flex;
+  flex-direction: column;
+}
+.ct-user-card-content-phone {
+  height: 35px;
+  border-radius: 17px;
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  border: 1px solid #E3E3E3;
+  margin-top: 18px;
+}
+.ct-user-card-content-phone-img {
+  width: 25px;
+  height: 25px;
+  margin-right: 10px;
+}
+.ct-user-container {
+  width: 100%;
+  padding: 0 35px;
+}
+.ct-user-container-item {
+  padding: 35px 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #eeeeee;
+}
+.ct-user-container-item-left {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.ct-user-container-item-left-img {
+  width: 31px;
+  height: 31px;
+  margin-right: 27px;
+}
+.ct-user-container-item-right {
+  width: 11px;
+  height: 19px;
+}

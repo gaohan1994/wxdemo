@@ -1,0 +1,36 @@
+.ct-product {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.ct-product-menu-container {
+  width: 200px;
+  background-color: #F6F6F6;
+}
+.ct-product-search {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 27px 0;
+  border-bottom: 1px solid #eeeeee;
+}
+.ct-product-search-input {
+  width: 600px;
+  height: 70px;
+  border-radius: 35px;
+  background-color: #F6F6F6;
+}
+.ct-product-search-scan {
+  width: 55px;
+  height: 55px;
+  margin-left: 30px;
+}
+.ct-product-list {
+  display: flex;
+  flex-direction: row;
+}
+.ct-product-list-container {
+  flex-grow: 1;
+  flex: 1;
+}
