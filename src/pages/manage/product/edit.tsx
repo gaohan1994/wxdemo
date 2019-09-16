@@ -1,10 +1,7 @@
-import { ComponentClass } from 'react'
 import Taro, { Component, Config } from '@tarojs/taro'
-import { View, Text, ScrollView } from '@tarojs/components'
+import { View, Image } from '@tarojs/components'
 import './index.less'
-import { getWindowHeight } from '../../../utils/style';
 import { AtInput, AtButton, AtModal } from 'taro-ui';
-import invariant from 'invariant';
 import * as actions from '../../../actions/manage';
 import { connect } from '@tarojs/redux';
 
@@ -25,8 +22,9 @@ type State = {
   inventory: string;
   checkInventory: string;
   price: string;
-  cancelOpen: boolean;
+  oriPrice: string;
   confirmOpen: boolean;
+  type: string;
 }
 @connect(state => state.manage, actions)
 class ProductList extends Component<IProps, State> {
@@ -45,16 +43,28 @@ class ProductList extends Component<IProps, State> {
   constructor (props: any) {
     super(props);
     const item = this.$router.params && this.$router.params.item && JSON.parse(this.$router.params.item) || {};
+    const type = this.$router.params.type || '';
     this.state = {
       ...item,
+      oriPrice: '1.00',
       changeCheckInventory: '',
-      cancelOpen: false,
       confirmOpen: false,
+      type,
     }
   }
 
   componentWillReceiveProps () {
     
+  }
+
+  public componentDidShow = () => {
+    const type = this.$router.params.type || '';
+
+    if (type === 'inventory') {
+      Taro.setNavigationBarTitle({title: '库存调整'});
+    } else if (type === 'price') {
+      Taro.setNavigationBarTitle({title: '商品调价'});
+    }
   }
 
   public onScrollToUpper = () => {
@@ -71,16 +81,32 @@ class ProductList extends Component<IProps, State> {
     this.setState({ inventory: value });
   }
   public changePrice = (value: string) => {
-    this.setState({ price: value });
+    console.log('value: ', value);
+    this.setState({ price: value.replace('￥', '') });
+  }
+  public changeOriPrice = (value: string) => {
+    console.log('value: ', value);
+    this.setState({ oriPrice: value.replace('￥', '') });
   }
   public onCancel = () => {
-    
+    Taro.navigateBack({});      
   }
   public onConfirm = () => {
-    
+    Taro.showToast({
+      icon: 'success',
+      title: '修改成功！',
+      duration: 1000
+    });
+
+    setTimeout(() => {
+      Taro.navigateBack({});      
+    }, 1000);
   }
   public changeCheckInventory = (value: string) => {
     this.setState({checkInventory: value});
+  }
+  public changeConfirmModal = (value: boolean) => {
+    this.setState({ confirmOpen: value });
   }
 
   render () {
@@ -97,34 +123,78 @@ class ProductList extends Component<IProps, State> {
           title="商品条码"
           value={this.state.qrcode}
           onChange={this.changeQrcode}
-        />
-        <AtInput
-          name="price"
-          title="商品售价"
-          value={this.state.price}
-          onChange={this.changePrice}
-        />
-        <AtInput
-          name="price"
-          title="进货价"
-          value={'5.00'}
-          disabled={true}
-          onChange={this.changePrice}
-        />
-        <AtInput
-          name="inventory"
-          title="可用库存"
-          value={this.state.inventory}
-          onChange={this.changeInventory}
-        />
-        <AtInput
-          name="changeCheckInventory"
-          title="预警库存"
-          value={this.state.checkInventory}
-          onChange={this.changeCheckInventory}
-        />
+        >
+            <Image src="http://net.huanmusic.com/wx/icon_code.png" className="ct-product-input-box-qrcode" />
+        </AtInput>
+        {this.state.type === 'price' && (
+          <View>
+            <AtInput
+              className="ct-input-price"
+              name="price"
+              title="现售价"
+              value={`￥${this.state.price}`}
+              onChange={this.changePrice}
+            />
+            <AtInput
+              className="ct-input-price"
+              name="price"
+              title="调价为"
+              value={`￥${this.state.oriPrice}`}
+              onChange={this.changeOriPrice}
+            />
+          </View>
+        )}
 
-        <View className="ct-button-contaienr">
+        {this.state.type !== 'price' && this.state.type !== 'inventory' && (
+          <View>
+            <AtInput
+              className="ct-input-price"
+              name="price"
+              title="商品售价"
+              value={`￥${this.state.price}`}
+              onChange={this.changePrice}
+            />
+            <AtInput
+              className="ct-input-price"
+              name="price"
+              title="进货价"
+              value={`￥${this.state.oriPrice}`}
+              onChange={this.changeOriPrice}
+            />
+            <AtInput
+              name="inventory"
+              title="可用库存"
+              value={this.state.inventory}
+              onChange={this.changeInventory}
+            />
+            <AtInput
+              name="changeCheckInventory"
+              title="预警库存"
+              value={'10'}
+              // onChange={this.changeCheckInventory}
+            />
+          </View>
+        )}
+
+        {this.state.type === 'inventory' && (
+          <View>
+            <AtInput
+              name="inventory"
+              title="现库存"
+              value={this.state.inventory}
+              onChange={this.changeInventory}
+            />
+            <AtInput
+              name="changeCheckInventory"
+              title="调整为"
+              value={'10'}
+              // onChange={this.changeCheckInventory}
+            />
+          </View>
+        )}
+        
+
+        <View className="ct-button-contaienr ct-product-button">
           <AtButton
             className="ct-button"
             type="primary"
@@ -133,24 +203,24 @@ class ProductList extends Component<IProps, State> {
             保存
           </AtButton>
         </View>
-        <View className="ct-button-contaienr">
+        <View className="ct-button-contaienr ct-product-button-cancel">
           <AtButton
-            type="primary"
-            className="ct-button ct-button-white"
+            type="secondary"
+            className="ct-sec-button"
             onClick={this.onCancel}
           >
             取消
           </AtButton>
         </View>
-        {/* <AtModal
-          isOpened={this.state.cancelOpen}
+        <AtModal
+          isOpened={this.state.confirmOpen}
           cancelText='取消'
           confirmText='确认'
-          onClose={ this.handleClose }
-          onCancel={ this.handleCancel }
-          onConfirm={ this.handleConfirm }
-          content='欢迎加入京东凹凸实验室\n\r欢迎加入京东凹凸实验室'
-        /> */}
+          onClose={() => this.changeConfirmModal(false)}
+          onCancel={() => this.changeConfirmModal(false)}
+          onConfirm={ this.onConfirm }
+          content='确认修改该商品吗'
+        />
       </View>
     )
   }

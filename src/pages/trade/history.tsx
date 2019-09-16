@@ -58,7 +58,7 @@ class History extends Component {
     
   }
 
-  async componentDidMount () {
+  async componentDidShow () {
     await this.changePage(1);
     this.props.fetchTradeHistory({page: this.state.page});
   }

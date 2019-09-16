@@ -6,6 +6,23 @@
   flex-direction: column;
   height: 100%;
 
+  &-input {
+    font-size: 30px;
+    color: #999999;
+    &-box {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      &-qrcode {
+        width: 70px !important;
+        height: 70px !important;
+        margin-right: 10px;
+      }
+    }
+  }
+
+
   &-menu-container {
     width: 200px;
     background-color: #F6F6F6;
@@ -23,6 +40,9 @@
       height: 70px;
       border-radius: 35px;
       background-color: #F6F6F6;
+      display: flex;
+      align-items: center;
+      padding: 0 40px;
     }
     &-scan {
       width: 55px;
@@ -37,6 +57,12 @@
     &-container {
       flex-grow: 1;
       flex: 1;
+    }
+  }
+  &-button {
+    margin-top: 50px;
+    &-cancel {
+      margin-top: 20px;
     }
   }
 }

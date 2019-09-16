@@ -3,6 +3,37 @@
   flex-direction: column;
   align-items: center;
 }
+.ct-manage-history-item {
+  padding: 35px;
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+}
+.ct-manage-history-item-box {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+.ct-manage-history-item-name {
+  font-size: 32px;
+  color: #333333;
+}
+.ct-manage-history-item-time {
+  font-size: 28px;
+  color: #999999;
+}
+.ct-manage-history-item-qrcode {
+  font-size: 28px;
+  color: #333333;
+}
+.ct-manage-history-item-number {
+  font-size: 26px;
+  color: #E96339;
+}
+.ct-manage-history-item-border {
+  border-bottom: 1px solid #eeeeee;
+}
 .ct-manage-staff {
   background-color: #F6F6F6;
   height: 100%;
@@ -16,14 +47,14 @@
   color: #333333;
 }
 .ct-manage-staff-font-edit {
-  color: #2295E6;
+  color: #2EAAF8;
 }
 .ct-manage-staff-name {
   font-size: 38px;
   font-weight: bold;
 }
 .ct-manage-staff-add {
-  margin: 100px 0;
+  margin: 50px 0;
 }
 .ct-manage-staff-item {
   display: flex;
@@ -42,7 +73,7 @@
   flex-direction: column;
 }
 .ct-manage-staff-item-button {
-  padding: 20px 0;
+  padding: 40px 0;
   display: flex;
   flex-direction: row;
   align-items: center;

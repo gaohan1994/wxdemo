@@ -14,7 +14,7 @@ class Trade {
       return {
         way: Math.random() * 10 > 5 ? 'alipay' : 'wechat',
         type: Math.random() * 10 > 5 ? 1 : 0,
-        time: Date.now(),
+        time: '09:40:22',
         money: Math.round(Math.random() * 20)
       };
     })

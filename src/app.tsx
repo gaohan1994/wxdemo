@@ -29,10 +29,17 @@ class App extends Component {
       'pages/home/home',
       // 'pages/news/news',
       'pages/user/user',
+      'pages/user/detail',
       'pages/user/login',
+      'pages/user/device',
+      'pages/user/set',
+      'pages/user/change-pwd',
+
       'pages/trade/history',
       'pages/trade/statistic',
       'pages/trade/detail',
+      'pages/trade/sort',
+      'pages/trade/calendar',
 
       'pages/manage/staff',
       'pages/manage/staff-add',
@@ -41,28 +48,29 @@ class App extends Component {
       'pages/manage/product/list',
       'pages/manage/product/edit',
       'pages/manage/product/add',
+      'pages/manage/inventory/warn-list',
+      'pages/manage/history',
     ],
     window: {
       backgroundTextStyle: 'light',
       navigationBarBackgroundColor: '#2eaaf8',
-      backgroundColor: '#46A6EA',
       navigationBarTitleText: 'WeChat',
       navigationBarTextStyle: 'white'
     },
     tabBar: {
-      color: "#666",
-      selectedColor: "#b4282d",
-      backgroundColor: "#fafafa",
+      color: "#ACACAC",
+      selectedColor: "#2EAAF8",
+      backgroundColor: "#ffffff",
       borderStyle: 'black',
       list: [{
         pagePath: "pages/home/home",
-        // iconPath: "./assets/tab-bar/home.png",
-        // selectedIconPath: "./assets/tab-bar/home-active.png",
+        iconPath: "./assets/tab-bar/icon_nav_home.png",
+        selectedIconPath: "./assets/tab-bar/icon_nav_home_xuan.png",
         text: "首页"
       }, {
         pagePath: "pages/user/user",
-        // iconPath: "./assets/tab-bar/user.png",
-        // selectedIconPath: "./assets/tab-bar/user-active.png",
+        iconPath: "./assets/tab-bar/icon_nav_user.png",
+        selectedIconPath: "./assets/tab-bar/icon_nav_user_xuan.png",
         text: "个人中心"
       }]
     }

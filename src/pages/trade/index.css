@@ -12,6 +12,13 @@
   font-size: 32px;
   color: #999999;
 }
+.ct-trade-title-number {
+  color: #333333;
+}
+.ct-trade-time {
+  font-size: 28px;
+  color: #333333;
+}
 .ct-trade-number {
   font-size: 80px;
   color: #2EAAF8;
@@ -58,4 +65,51 @@
   padding-bottom: 30px;
   margin-bottom: 30px;
   border-bottom: 1px solid #eeeeee;
+}
+.ct-trade-statistic {
+  background-color: #f6f6f6;
+  height: 100%;
+}
+.ct-trade-statistic-box {
+  background-color: #ffffff;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.ct-trade-statistic-buttons {
+  padding: 32px 0;
+}
+.ct-trade-statistic-date {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 68px;
+}
+.ct-trade-statistic-date-center {
+  height: 70px;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.ct-trade-statistic-date-time {
+  border: 1px solid #eeeeee;
+  border-radius: 10px 0 0 10px;
+  border-right: 0px;
+}
+.ct-trade-statistic-date-icon {
+  border: 1px solid #eeeeee;
+  border-radius: 0 10px 10px 0;
+}
+.ct-trade-statistic-date-icon-img {
+  width: 37px;
+  height: 37px;
+}
+.ct-trade-calendar {
+  width: 100%;
+  padding: 35px;
+}
+.ct-trade-container {
+  background-color: #f6f6f6;
+  height: 100%;
 }

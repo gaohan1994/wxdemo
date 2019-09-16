@@ -58,18 +58,37 @@ button {
 .ct-button-white {
   background-color: white !important;
 }
+.ct-sec-button {
+  width: 560px;
+}
 .ct-input-container {
   width: 100%;
   background-color: white;
 }
 .at-input__title {
-  font-size: 30px;
-  color: #999999;
+  font-size: 30px !important;
+  color: #999999 !important;
 }
 .item-thumb__info {
   width: 31px !important;
   height: 31px !important;
 }
 .at-input__input {
-  text-align: right;
+  text-align: right !important;
+  font-size: 30px !important;
+  color: #333333 !important;
+}
+.content-inner__img {
+  width: 75px !important;
+  height: 75px !important;
+}
+.at-button--secondary {
+  border-color: #2EAAF8 !important;
+  color: #2EAAF8 !important;
+}
+.ct-mar-t-20 {
+  margin-top: 20px;
+}
+.ct-mar-t-40 {
+  margin-top: 40px;
 }

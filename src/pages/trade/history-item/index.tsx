@@ -50,14 +50,25 @@ class Index extends Component {
   public navigateToDetail = () => {
     Taro.navigateTo({
       url: `/pages/trade/detail?id=${this.props.item.id}`
-    })
+    });
   }
 
   public onSort = () => {
-    console.log('onSort');
+    Taro.navigateTo({
+      url: `/pages/trade/sort`
+    });
   }
 
   render () {
+    let totalMoney = 0;
+    this.props.item && this.props.item.trandeList && this.props.item.trandeList.forEach((item) => {
+      if (item.type === 1) {
+        totalMoney += Number(item.money);
+      } else {
+        totalMoney -= Number(item.money);
+      }
+    });
+
     return (
       <View 
         className={`${cssPrefix}`}
@@ -65,8 +76,8 @@ class Index extends Component {
         <View className={`${cssPrefix}-title`}>
           {/* <Text className={`${cssPrefix}-font`}>2019年5月21日</Text> */}
           {this.props.itemNumber === 0 
-            ? <Text className={`${cssPrefix}-font`}>2019年5月21日（今天）</Text>
-            : <Text className={`${cssPrefix}-font`}>2019年5月21日</Text>}
+            ? <Text className={`${cssPrefix}-font ${cssPrefix}-font-detail`}>2019年5月21日（今天）</Text>
+            : <Text className={`${cssPrefix}-font ${cssPrefix}-font-detail`}>2019年5月21日</Text>}
           {this.props.itemNumber === 0 && (
             <View 
               className={`${cssPrefix}-title-sort`}
@@ -79,14 +90,17 @@ class Index extends Component {
         </View>
 
         <View className={`${cssPrefix}-content`}>
-          <View className={`${cssPrefix}-content-item`}>
-            <Text className={`${cssPrefix}-font ${cssPrefix}-font-detail`}>
-              {`交易笔数 ${this.props.item && this.props.item.totalNumber || 0}`}
-            </Text>
-            <Text className={`${cssPrefix}-font ${cssPrefix}-font-detail`}>
-              {`交易金额(元) ${this.props.item && this.props.item.totalMoney || `0.00`}`}
-            </Text>
-          </View>
+          {this.props.item && this.props.item.trandeList && this.props.item.trandeList.length > 0 && (
+            <View className={`${cssPrefix}-content-item`}>
+              <Text className={`${cssPrefix}-font ${cssPrefix}-font-detail`}>
+                {`交易笔数 ${this.props.item.trandeList && this.props.item.trandeList.length || 0}`}
+              </Text>
+              <Text className={`${cssPrefix}-font ${cssPrefix}-font-detail`}>
+                {`交易金额(元) ${totalMoney ? `${totalMoney}.00` : `0.00`}`}
+              </Text>
+            </View>
+          )}
+          
           {this.props.item && this.props.item.trandeList && this.props.item.trandeList.length > 0 
             ? this.props.item.trandeList.map((listItem: any, index: number) => {
               return (
@@ -108,13 +122,15 @@ class Index extends Component {
                   <Text 
                     className={`${cssPrefix}-number ${listItem.type === 1 ? `${cssPrefix}-number-red` : `${cssPrefix}-number-black`}`}
                   >
-                    {listItem.type === 1 ? `${listItem.money}` : `-${listItem.money}`}
+                    {listItem.type === 1 ? `+${listItem.money}.00` : `-${listItem.money}.00`}
                   </Text>
                 </View>
               )
             }) 
             : (
-            <Text className={`${cssPrefix}-font ${cssPrefix}-font-detail`}>今日暂无交易记录</Text>
+            <View className={`${cssPrefix}-empty`}>
+              <Text className={`${cssPrefix}-font ${cssPrefix}-font-subdetail`}>今日暂无交易记录</Text>
+            </View>
           )}
         </View>
       </View>

@@ -1,18 +1,11 @@
-import { ComponentClass } from 'react'
 import Taro, { Component, Config } from '@tarojs/taro'
-import { View, Text } from '@tarojs/components'
+import { View, Text, Image } from '@tarojs/components'
 import { connect } from '@tarojs/redux';
 import './index.less'
+import '../home/index.less';
+import { AtTabs, AtTabsPane } from 'taro-ui';
 
-// #region 书写注意
-//
-// 目前 typescript 版本还无法在装饰器模式下将 Props 注入到 Taro.Component 中的 props 属性
-// 需要显示声明 connect 的参数类型并通过 interface 的方式指定 Taro.Component 子类的 props
-// 这样才能完成类型检查和 IDE 的自动提示
-// 使用函数模式则无此限制
-// ref: https://github.com/DefinitelyTyped/DefinitelyTyped/issues/20796
-//
-// #endregion
+const cssprefix = 'ct-trade';
 
 type PageStateProps = {
   userInfo: any;
@@ -24,18 +17,19 @@ type PageDispatchProps = {
 
 type PageOwnProps = {}
 
-type PageState = {}
-
-type IProps = PageStateProps & PageDispatchProps & PageOwnProps
-
-interface Statistic {
-  props: IProps;
+type PageState = {
+  current: number;
 }
 
-@connect(state => state.user)
-class Statistic extends Component {
+type IProps = PageStateProps & PageDispatchProps & PageOwnProps;
 
-    /**
+@connect(state => state.user)
+class Statistic extends Component<IProps, PageState> {
+  state = {
+    current: 0,
+  }
+
+  /**
    * 指定config的类型声明为: Taro.Config
    *
    * 由于 typescript 对于 object 类型推导只能推出 Key 的基本类型
@@ -50,22 +44,100 @@ class Statistic extends Component {
     
   }
 
+  handleChange = (value: number) => {
+    console.log('value: ', value);
+    this.setState({current: value});
+  }
+
+  public changeDate = (type: 'day' | 'month') => {
+    if (type === 'month') {
+      Taro.showToast({
+        icon: 'loading',
+        title: '权限未开放'
+      });
+      return;
+    }
+    Taro.navigateTo({
+      url: `/pages/trade/calendar?type=${type}`
+    });
+  }
+
   render () {
+    const tabList = [
+      {title: '日报'},
+      {title: '月报'},
+    ]
     return (
-      <View className='index'>
-        <View>
-          <Text>交易统计</Text>
-        </View>
+      <View className={`${cssprefix}-statistic`}>
+        <AtTabs current={this.state.current} tabList={tabList} onClick={this.handleChange}>
+          <AtTabsPane current={this.state.current} index={0}>
+            <View className={`${cssprefix}-statistic-box`}>
+              <View className="ct-home-card-content">
+                <View className={`${cssprefix}-statistic-date`} onClick={() => this.changeDate('day')}>
+                  <View className={`${cssprefix}-statistic-date-time ${cssprefix}-statistic-date-center`}>
+                    <Text className={`${cssprefix}-time`}>2019年05月20日（昨天）</Text>
+                  </View>
+                  <View className={`${cssprefix}-statistic-date-icon ${cssprefix}-statistic-date-center`}>
+                    <Image className={`${cssprefix}-statistic-date-icon-img`} src="http://net.huanmusic.com/wx/icon_calendar.png" />
+                  </View>
+                </View>
+                <Text className="ct-home-card-content-title">共收到(元)</Text>
+                <Text className="ct-home-card-content-number">99.99</Text>
+              </View>
+              <View className={`ct-home-card-buttons ${cssprefix}-statistic-buttons`}>
+                <View 
+                  className="ct-home-card-buttons-button border-right"
+                  style={{padding: 0}}
+                >
+                  <Text className={`${cssprefix}-title`}>收款笔数</Text>
+                  <Text className={`${cssprefix}-title ${cssprefix}-title-number`}>10</Text>
+                </View>
+                <View 
+                  className="ct-home-card-buttons-button"
+                  style={{padding: 0}}
+                >
+                  <Text className={`${cssprefix}-title`}>单笔均价</Text>
+                  <Text className={`${cssprefix}-title ${cssprefix}-title-number`}>10.00</Text>
+                </View>
+              </View>
+            </View>
+          </AtTabsPane>
+          <AtTabsPane current={this.state.current} index={1}>
+            <View className={`${cssprefix}-statistic-box`}>
+              <View className="ct-home-card-content">
+                <View className={`${cssprefix}-statistic-date`} onClick={() => this.changeDate('month')}>
+                  <View className={`${cssprefix}-statistic-date-time ${cssprefix}-statistic-date-center`}>
+                    <Text className={`${cssprefix}-time`}>2019年05月20日（昨天）</Text>
+                  </View>
+                  <View className={`${cssprefix}-statistic-date-icon ${cssprefix}-statistic-date-center`}>
+                    <Image className={`${cssprefix}-statistic-date-icon-img`} src="http://net.huanmusic.com/wx/icon_calendar.png" />
+                  </View>
+                </View>
+                <Text className="ct-home-card-content-title">共收到(元)</Text>
+                <Text className="ct-home-card-content-number">99.99</Text>
+              </View>
+              <View className={`ct-home-card-buttons ${cssprefix}-statistic-buttons`}>
+                <View 
+                  className="ct-home-card-buttons-button border-right"
+                  style={{padding: 0}}
+                >
+                  <Text className={`${cssprefix}-title`}>收款笔数</Text>
+                  <Text className={`${cssprefix}-title ${cssprefix}-title-number`}>10</Text>
+                </View>
+                <View 
+                  className="ct-home-card-buttons-button"
+                  style={{padding: 0}}
+                >
+                  <Text className={`${cssprefix}-title`}>单笔均价</Text>
+                  <Text className={`${cssprefix}-title ${cssprefix}-title-number`}>10.00</Text>
+                </View>
+              </View>
+            </View>
+          </AtTabsPane>
+        </AtTabs>
       </View>
     )
   }
 }
 
-// #region 导出注意
-//
-// 经过上面的声明后需要将导出的 Taro.Component 子类修改为子类本身的 props 属性
-// 这样在使用这个子类时 Ts 才不会提示缺少 JSX 类型参数错误
-//
-// #endregion
-
-export default Statistic as ComponentClass<PageOwnProps, PageState>
+export default Statistic;

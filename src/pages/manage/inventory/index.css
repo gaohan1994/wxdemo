@@ -1,0 +1,30 @@
+.ct-inventory {
+  background-color: #f6f6f6;
+  height: 100%;
+}
+.ct-inventory-name {
+  font-size: 32px;
+  color: #333333;
+}
+.ct-inventory-font {
+  font-size: 28px;
+  color: #333333;
+}
+.ct-inventory-font-number {
+  color: #E96339;
+}
+.ct-inventory-item {
+  position: relative;
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  padding: 40px 35px;
+}
+.ct-inventory-item-border {
+  border-bottom: 1px solid #eeeeee;
+}
+.ct-inventory-item-button {
+  position: absolute;
+  right: 35px;
+  bottom: 40px;
+}

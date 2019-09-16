@@ -9,13 +9,13 @@
   }
   &-name {
     font-size: 36px;
-    font-weight: bold;
     color: white;
   }
   &-phone {
     font-size: 22px;
     color: white;
   }
+
   &-card {
     margin: 24px 35px;
     width: 680px;
@@ -43,7 +43,7 @@
         display: flex;
         align-items: center;
         flex-direction: row;
-        border: 1px solid #E3E3E3;
+        // border: 1px solid #E3E3E3;
         margin-top: 18px;
         &-img {
           width: 25px;
@@ -67,15 +67,56 @@
         display: flex;
         flex-direction: row;
         align-items: center;
+        padding-left: 12px;
         &-img {
           width: 31px;
           height: 31px;
-          margin-right: 27px;
+          margin-right: 15px;
         }
       }
       &-right {
         width: 11px;
         height: 19px;
+      }
+    }
+  }
+  &-detail {
+    &-name {
+      font-size: 34px;
+      color: #666666;
+    }
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    &-bge {
+      width: 10px;
+      height: 32px;
+      background-color: #2EAAF8;
+      border-radius: 5px;
+      margin-right: 10px;
+    }
+    &-border {
+      border-bottom: 1px solid @border-color;
+    }
+  }
+
+  &-device {
+
+    &-name {
+      font-size: 30px;
+      color: #666666;
+      font-weight: bold;
+    }
+    &-number {
+      font-size: 22px;
+      color: #666666;
+      margin-top: 10px;
+    }
+    &-content {
+      align-items: center;
+      justify-content: center;
+      &-detail {
+        margin-right: 150px;
       }
     }
   }

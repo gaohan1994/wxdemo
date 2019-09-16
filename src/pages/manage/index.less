@@ -1,3 +1,4 @@
+@import "../../styles/theme.less";
 @manage-predix: ct-manage;
 @staff-prefix: ct-manage-staff;
 
@@ -5,6 +6,39 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  &-history {
+    &-item {
+      padding: 35px;
+      background-color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      &-box {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+      }
+      &-name {
+        font-size: 32px;
+        color: #333333;
+      }
+      &-time {
+        font-size: 28px;
+        color: #999999;
+      }
+      &-qrcode {
+        font-size: 28px;
+        color: #333333;
+      }
+      &-number {
+        font-size: 26px;
+        color: #E96339;
+      }
+      &-border {
+        border-bottom: 1px solid @border-color;
+      }
+    }
+  }
 }
 
 .@{staff-prefix} {
@@ -19,7 +53,7 @@
     font-size: 28px;
     color: #333333;
     &-edit {
-      color: #2295E6;
+      color: #2EAAF8;
     }
   }
   &-name {
@@ -27,7 +61,7 @@
     font-weight: bold;
   }
   &-add {
-    margin: 100px 0;
+    margin: 50px 0;
   }  
   &-item {
     display: flex;
@@ -45,7 +79,7 @@
       }
     }
     &-button {
-      padding: 20px 0;
+      padding: 40px 0;
       display: flex;
       flex-direction: row;
       align-items: center;

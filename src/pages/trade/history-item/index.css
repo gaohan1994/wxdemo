@@ -7,6 +7,7 @@
   font-size: 28px;
 }
 .ct-history-item-font-title {
+  font-size: 32px;
   color: #333333;
   font-weight: bold;
 }
@@ -46,6 +47,13 @@
   width: 28px;
   height: 28px;
   margin-right: 11px;
+}
+.ct-history-item-empty {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 0;
 }
 .ct-history-item-content {
   padding: 0 35px;

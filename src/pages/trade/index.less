@@ -12,6 +12,13 @@
   &-title {
     font-size: 32px;
     color: #999999;
+    &-number {
+      color: #333333;
+    }
+  }
+  &-time {
+    font-size: 28px;
+    color: #333333;
   }
   &-number {
     font-size: 80px;
@@ -60,5 +67,53 @@
       margin-bottom: 30px;
       border-bottom: 1px solid @border-color;
     }
+  }
+
+  &-statistic {
+    background-color: #f6f6f6;
+    height: 100%;
+    &-box {
+      background-color: #ffffff;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+    &-buttons {
+      padding: 32px 0;
+    }
+    &-date {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      margin-bottom: 68px;
+      &-center {
+        height: 70px;
+        padding: 0 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      &-time {
+        border: 1px solid @border-color;
+        border-radius: 10px 0 0 10px;
+        border-right: 0px;
+      }
+      &-icon {
+        border: 1px solid @border-color;
+        border-radius: 0 10px 10px 0;
+        &-img {
+          width: 37px;
+          height: 37px;;
+        }
+      }
+    }
+  }
+  &-calendar {
+    width: 100%;
+    padding: 35px;
+  }
+  &-container {
+    background-color: #f6f6f6;
+    height: 100%;
   }
 }

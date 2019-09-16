@@ -72,9 +72,26 @@ class Manage extends Component {
         return;
       }
       case '商品管理': {
-        this.navigateTo('manage/product/list')
+        this.navigateTo('manage/product/list');
+        return;
+      }
+      case '库存预警': {
+        this.navigateTo('manage/inventory/warn-list');
+        return;
+      }
+      case '库存调整': {
+        this.navigateTo('manage/product/list?type=inventory');
+        return;
+      }
+      case '商品调价': {
+        this.navigateTo('manage/product/list?type=price');
+        return;
       }
       default: {
+        Taro.showToast({
+          icon: 'loading',
+          title: '权限未开放'
+        })
         return;
       }
     }
@@ -83,7 +100,7 @@ class Manage extends Component {
   render () {
     return (
       <View className='ct-manage'>
-        <Image src="http://net.huanmusic.com/wx/bg.png" className="ct-home-bg"  />
+        <View className="ct-home-bg" />
         <View className='ct-home-card'>
           <AtGrid 
             hasBorder={false}

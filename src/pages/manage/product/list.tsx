@@ -32,18 +32,21 @@ type PageDispatchProps = {
 
 type PageOwnProps = {}
 
-type PageState = {}
+type PageState = {
+  loading: boolean;
+  height: string;
+  type: string;
+}
 
 type IProps = PageStateProps & PageDispatchProps & PageOwnProps
 
 interface ProductList {
   props: IProps;
-  height: string;
 }
 
 @connect(state => state.manage, actions)
-class ProductList extends Component {
-    /**
+class ProductList extends Component<IProps, PageState> {
+  /**
    * 指定config的类型声明为: Taro.Config
    *
    * 由于 typescript 对于 object 类型推导只能推出 Key 的基本类型
@@ -54,9 +57,14 @@ class ProductList extends Component {
     navigationBarTitleText: '商品列表'
   }
 
-  state = {
-    loading: false,
-    height: '',
+  constructor (props: any) {
+    super(props);
+    const type = this.$router.params.type || '';
+    this.state = {
+      loading: false,
+      height: '',
+      type,
+    }
   }
 
   componentWillReceiveProps () {
@@ -78,15 +86,31 @@ class ProductList extends Component {
     query.exec((res) => {
       const searchHeight = res[0].height;
       const buttonsHeight = res[1].height;
-
       that.setState({height: `${height - searchHeight - buttonsHeight}px`});
     });
-    // const searchHeight = this.refs.search.boundingClientRect().exec(res => console.log('res:', res));
-    
   }
 
   public onScrollToUpper = () => {
     
+  }
+
+  public navigateToHistory = (type: 'inventory' | 'price') => {
+    Taro.navigateTo({
+      url: `/pages/manage/history?type=${type}`
+    });
+  }
+
+  public toast = () => {
+    Taro.showToast({
+      title: '权限未开放',
+      icon: 'loading',
+    })
+  }
+
+  public onAdd = () => {
+    Taro.navigateTo({
+      url: `/pages/manage/product/add`
+    });
   }
 
   render () {
@@ -94,19 +118,21 @@ class ProductList extends Component {
     return (
       <View className='ct-product'>
         <View className="ct-product-search" id="ct-product-search" >
-          <View className="ct-product-search-input" />
-          <Image src="http://net.huanmusic.com/wx/icon_scan.png" className="ct-product-search-scan" />
+          <View className="ct-product-search-input" onClick={this.toast}>
+            <Text className="ct-product-input">请输入商品名称、条码查询</Text>
+          </View>
+          <Image src="http://net.huanmusic.com/wx/icon_scan.png" className="ct-product-search-scan" onClick={this.toast} />
         </View>
         <View className="ct-product-list">
-          <ScrollView
-            scrollY={true}
+          <View
+            // scrollY={true}
             className="ct-product-menu-container"
             style={{ height: this.state.height }}
           >
             <Menu 
               menu={[{name: '冠军面包'}, {name: '中秋礼盒'}, {name: '精致西点'}, {name: '特调饮品'}]} 
             />
-          </ScrollView>
+          </View>
           {loading === true ? (
             <View>
               <Text>暂无商品</Text>
@@ -119,12 +145,13 @@ class ProductList extends Component {
             >
               <View>
                 <List 
-                  list={new Array(4).fill({}).map((_, index: number) => {
+                  type={this.state.type}
+                  list={new Array(10).fill({}).map((_, index: number) => {
                     return {
                       id: index + 1,
                       name: '香芋甜心（面包）',
                       price: '3.00',
-                      qrcode: '条码：1034789456',
+                      qrcode: '1034789456',
                       inventory: 30,
                     }
                   })
@@ -134,22 +161,49 @@ class ProductList extends Component {
             </ScrollView>
           )}
         </View>
-        <View className="ct-home-card-buttons" id="ct-home-card-buttons">
-          <View 
-            // onClick={() => this.onStaffClickHandle(staffItem)}
-            className="ct-manage-staff-item-button border-right"
-          >
-            <Image src="http://net.huanmusic.com/wx/icon_classify.png" className="ct-manage-staff-item-button-img" />
-            <Text className="ct-manage-staff-font ct-manage-staff-font-edit">分类设置</Text>
+        {this.state.type === 'inventory' && (
+          <View className="ct-home-card-buttons" id="ct-home-card-buttons">
+            <View 
+              onClick={() => this.navigateToHistory('inventory')}
+              className="ct-manage-staff-item-button border-right"
+            >
+              <Image src="http://net.huanmusic.com/wx/icon_store.png" className="ct-manage-staff-item-button-img" />
+              <Text className="ct-manage-staff-font ct-manage-staff-font-edit">库存调整记录</Text>
+            </View>
           </View>
-          <View 
-            // onClick={() => this.onDeleteHandle()}
-            className="ct-manage-staff-item-button"
-          >
-            <Image src="http://net.huanmusic.com/wx/icon_add.png" className="ct-manage-staff-item-button-img" />
-            <Text className="ct-manage-staff-font ct-manage-staff-font-edit">新增商品</Text>
+        )}
+
+        {this.state.type === 'price' && (
+          <View className="ct-home-card-buttons" id="ct-home-card-buttons">
+            <View 
+              onClick={() => this.navigateToHistory('price')}
+              className="ct-manage-staff-item-button border-right"
+            >
+              <Image src="http://net.huanmusic.com/wx/icon_log.png" className="ct-manage-staff-item-button-img" />
+              <Text className="ct-manage-staff-font ct-manage-staff-font-edit">调价纪录</Text>
+            </View>
+            </View>
+        )}
+
+        {this.state.type !== 'inventory' && this.state.type !== 'price' && (
+          <View className="ct-home-card-buttons" id="ct-home-card-buttons">
+            <View 
+              onClick={this.toast}
+              className="ct-manage-staff-item-button border-right"
+            >
+              <Image src="http://net.huanmusic.com/wx/icon_classify.png" className="ct-manage-staff-item-button-img" />
+              <Text className="ct-manage-staff-font ct-manage-staff-font-edit">分类设置</Text>
+            </View>
+            <View 
+              onClick={() => this.onAdd()}
+              className="ct-manage-staff-item-button"
+            >
+              <Image src="http://net.huanmusic.com/wx/icon_add.png" className="ct-manage-staff-item-button-img" />
+              <Text className="ct-manage-staff-font ct-manage-staff-font-edit">新增商品</Text>
+            </View>
           </View>
-        </View>
+        )}
+        
       </View>
     )
   }
@@ -162,4 +216,4 @@ class ProductList extends Component {
 //
 // #endregion
 
-export default ProductList as ComponentClass<PageOwnProps, PageState>
+export default ProductList;

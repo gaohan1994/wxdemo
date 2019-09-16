@@ -86,7 +86,7 @@ class Detail extends Component {
           </View>
           <View className="ct-trade-card-item">
             <Text className="ct-trade-font">收款流水号</Text>
-            <Text className="ct-trade-font ct-trade-font-black">升腾小铺</Text>
+            <Text className="ct-trade-font ct-trade-font-black">xy2378l89u78</Text>
           </View>
         </View>
         <View className="ct-trade-card">
@@ -96,21 +96,21 @@ class Detail extends Component {
           <View className="ct-trade-card-item">
             <Text className="ct-trade-font">晨光签字笔</Text>
             <View className="ct-trade-card-item-detail">
-              <Text className="ct-trade-card-item-detail-number ct-trade-font ct-trade-font-black">X1</Text>
+              <Text className="ct-trade-card-item-detail-number ct-trade-font ct-trade-font-black">x1</Text>
               <Text className="ct-trade-card-item-detail-price ct-trade-font ct-trade-font-black">￥1.00</Text>
             </View>
           </View>
           <View className="ct-trade-card-item">
             <Text className="ct-trade-font">伊利原味酸奶</Text>
             <View className="ct-trade-card-item-detail">
-              <Text className="ct-trade-card-item-detail-number ct-trade-font ct-trade-font-black">X1</Text>
+              <Text className="ct-trade-card-item-detail-number ct-trade-font ct-trade-font-black">x1</Text>
               <Text className="ct-trade-card-item-detail-price ct-trade-font ct-trade-font-black">￥3.50</Text>
             </View>
           </View>
           <View className="ct-trade-card-item">
             <Text className="ct-trade-font">可乐听装</Text>
             <View className="ct-trade-card-item-detail">
-              <Text className="ct-trade-card-item-detail-number ct-trade-font ct-trade-font-black">X1</Text>
+              <Text className="ct-trade-card-item-detail-number ct-trade-font ct-trade-font-black">x1</Text>
               <Text className="ct-trade-card-item-detail-price ct-trade-font ct-trade-font-black">￥3.00</Text>
             </View>
           </View>

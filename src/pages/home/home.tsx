@@ -81,6 +81,10 @@ class Home extends Component {
         return;
       }
       default: {
+        Taro.showToast({
+          icon: 'loading',
+          title: '权限未开放',
+        });
         return;
       }
     }
@@ -89,14 +93,14 @@ class Home extends Component {
   render () {
     return (
       <View className='ct-home'>
-        <Image src="http://net.huanmusic.com/wx/bg.png" className="ct-home-bg"  />
+        <View className="ct-home-bg" />
         <View className="ct-home-card">
           <View className="ct-home-card-content">
             <Text className="ct-home-card-content-title">今日收款（元）</Text>
             <Text className="ct-home-card-content-number">99.99</Text>
             <Text className="ct-home-card-content-subtitle">收款共10笔</Text>
           </View>
-          <View className="ct-home-card-buttons">
+          <View className="ct-home-card-buttons ct-home-card-buttons-radius">
             <View 
               onClick={() => this.navigateTo('trade/history')}
               className="ct-home-card-buttons-button border-right"

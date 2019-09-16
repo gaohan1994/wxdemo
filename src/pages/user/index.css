@@ -7,7 +7,6 @@
 }
 .ct-user-name {
   font-size: 36px;
-  font-weight: bold;
   color: white;
 }
 .ct-user-phone {
@@ -43,7 +42,6 @@
   display: flex;
   align-items: center;
   flex-direction: row;
-  border: 1px solid #E3E3E3;
   margin-top: 18px;
 }
 .ct-user-card-content-phone-img {
@@ -67,13 +65,50 @@
   display: flex;
   flex-direction: row;
   align-items: center;
+  padding-left: 12px;
 }
 .ct-user-container-item-left-img {
   width: 31px;
   height: 31px;
-  margin-right: 27px;
+  margin-right: 15px;
 }
 .ct-user-container-item-right {
   width: 11px;
   height: 19px;
+}
+.ct-user-detail {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.ct-user-detail-name {
+  font-size: 34px;
+  color: #666666;
+}
+.ct-user-detail-bge {
+  width: 10px;
+  height: 32px;
+  background-color: #2EAAF8;
+  border-radius: 5px;
+  margin-right: 10px;
+}
+.ct-user-detail-border {
+  border-bottom: 1px solid #eeeeee;
+}
+.ct-user-device-name {
+  font-size: 30px;
+  color: #666666;
+  font-weight: bold;
+}
+.ct-user-device-number {
+  font-size: 22px;
+  color: #666666;
+  margin-top: 10px;
+}
+.ct-user-device-content {
+  align-items: center;
+  justify-content: center;
+}
+.ct-user-device-content-detail {
+  margin-right: 150px;
 }

@@ -10,11 +10,18 @@ type IProps = {
 }
 
 type State = {
-
+  selected: string;
 }
 
 @connect(state => state.manage, actions)
 class Menu extends Component<IProps, State> {
+
+  constructor (props: any) {
+    super(props);
+    this.state = {
+      selected: '冠军面包'
+    }
+  }
 
     /**
    * 指定config的类型声明为: Taro.Config
@@ -23,9 +30,6 @@ class Menu extends Component<IProps, State> {
    * 对于像 navigationBarTextStyle: 'black' 这样的推导出的类型是 string
    * 提示和声明 navigationBarTextStyle: 'black' | 'white' 类型冲突, 需要显示声明类型
    */
-  state = {
-
-  }
 
   componentWillReceiveProps () {
     
@@ -35,16 +39,21 @@ class Menu extends Component<IProps, State> {
 
   }
 
+  public changeSelected = (value: string) => {
+    this.setState({ selected: value });
+  }
+
   render () {
     const { menu } = this.props;
     return (
       <View>
         {
           menu && menu.length > 0 ? menu.map((item) => {
-            const active = item.name === '冠军面包';
+            const active = item.name === this.state.selected
             return (
               <View 
                 key={item.name}
+                onClick={() => this.changeSelected(item.name)}
                 className={`ct-product-list-menu-item ${active === true ? 'ct-product-list-menu-item-active' : ''}`}
               >
                 {active === true && (<View className="ct-product-list-menu-item-bge" />)}
